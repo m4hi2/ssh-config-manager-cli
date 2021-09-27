@@ -22,6 +22,13 @@ func dump(fileLocation string) {
 	fmt.Print(string(data))
 	fmt.Printf("\n")
 }
+
+func writeConfig(fileLocation string, configString string) {
+	f, err := os.OpenFile(fileLocation, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	check(err)
+	defer f.Close()
+	_, error := f.WriteString(configString)
+	check(error)
 }
 
 func generateHostString(host string,
