@@ -20,3 +20,10 @@ func dump() {
 	check(err)
 	fmt.Print(string(data))
 }
+
+func generateHostString(host string,
+	hostName string,
+	port int,
+	user string) string {
+	return fmt.Sprintf("Host %s\n\t HostName %s\n\t Port %d\n\t User %s\n", host, hostName, port, user)
+}
