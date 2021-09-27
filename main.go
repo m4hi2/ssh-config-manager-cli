@@ -39,7 +39,7 @@ func generateHostString(host string,
 }
 
 // extraction of username and hostname and port
-// user@10.0.0.1 -p 22 -> user, 10.0.0.1, 22
+// user@10.0.0.1 -p 22 -> 10.0.0.1, user, 22
 func extractParams(sshLogin string) (string, string, string) {
 	port := "22"
 	userAndHost := "none"
@@ -59,6 +59,6 @@ func extractParams(sshLogin string) (string, string, string) {
 		host = strings.TrimSpace(userAndHostName[1])
 	}
 
-	return user, host, port
+	return host, user, port
 
 }
