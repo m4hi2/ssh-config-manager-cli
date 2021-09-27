@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -27,4 +28,28 @@ func generateHostString(host string,
 	user string) string {
 	return fmt.Sprintf("Host %s\n\t HostName %s\n\t Port %s\n\t User %s\n", host, hostName, port, user)
 }
+
+// extraction of username and hostname and port
+// user@10.0.0.1 -p 22 -> user, 10.0.0.1, 22
+func extractParams(sshLogin string) (string, string, string) {
+	port := "22"
+	userAndHost := "none"
+	user := "none"
+	host := "none"
+	if strings.Contains(sshLogin, "-p") {
+		hostAndPort := strings.Split(sshLogin, "-p")
+		userAndHost = strings.TrimSpace(hostAndPort[0])
+		port = strings.TrimSpace(hostAndPort[1])
+	} else {
+		userAndHost = sshLogin
+	}
+
+	if strings.Contains(userAndHost, "@") {
+		userAndHostName := strings.Split(userAndHost, "@")
+		user = strings.TrimSpace(userAndHostName[0])
+		host = strings.TrimSpace(userAndHostName[1])
+	}
+
+	return user, host, port
+
 }
