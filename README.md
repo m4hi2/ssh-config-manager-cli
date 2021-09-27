@@ -8,7 +8,7 @@ A cli application to add/remove/edit hosts in `~/.ssh/config` file
 
 Well, since I'm not a talented developer/software engineer/programmer/problem solver, I've been tasked with
 maintaining the deployment/staging and the infrastructure servers. Which comes with the baggage of editing
-my `~/.ssh/config` file often. It has come to a point that I'm committed to write this tool
+my `~/.ssh/config` file often. It has come to a point that I'm committed to write this tool 😐
 
 ## Why Go?
 
