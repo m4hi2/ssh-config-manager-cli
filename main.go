@@ -23,7 +23,8 @@ func dump() {
 
 func generateHostString(host string,
 	hostName string,
-	port int,
+	port string,
 	user string) string {
-	return fmt.Sprintf("Host %s\n\t HostName %s\n\t Port %d\n\t User %s\n", host, hostName, port, user)
+	return fmt.Sprintf("Host %s\n\t HostName %s\n\t Port %s\n\t User %s\n", host, hostName, port, user)
+}
 }
