@@ -16,10 +16,12 @@ func check(e error) {
 	}
 }
 
-func dump() {
-	data, err := os.ReadFile("/home/m4hi2/ssh-config-manager-cli/config")
+func dump(fileLocation string) {
+	data, err := os.ReadFile(fileLocation)
 	check(err)
 	fmt.Print(string(data))
+	fmt.Printf("\n")
+}
 }
 
 func generateHostString(host string,
