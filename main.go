@@ -35,7 +35,7 @@ func generateHostString(host string,
 	hostName string,
 	port string,
 	user string) string {
-	return fmt.Sprintf("\n\nHost %s\n\t HostName %s\n\t Port %s\n\t User %s", host, hostName, port, user)
+	return fmt.Sprintf("\n\nHost %s\n\tHostName %s\n\tPort %s\n\tUser %s", host, hostName, port, user)
 }
 
 // extraction of username and hostname and port
