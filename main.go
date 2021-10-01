@@ -1,64 +1,22 @@
+/*
+Copyright © 2021 NAME HERE <EMAIL ADDRESS>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package main
 
-import (
-	"fmt"
-	"os"
-	"strings"
-)
+import "github.com/m4hi2/ssh-config-manager-cli/cmd"
 
 func main() {
-	dump()
-}
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func dump(fileLocation string) {
-	data, err := os.ReadFile(fileLocation)
-	check(err)
-	fmt.Print(string(data))
-	fmt.Printf("\n")
-}
-
-func writeConfig(fileLocation string, configString string) {
-	f, err := os.OpenFile(fileLocation, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	check(err)
-	defer f.Close()
-	_, error := f.WriteString(configString)
-	check(error)
-}
-
-func generateHostString(host string,
-	hostName string,
-	port string,
-	user string) string {
-	return fmt.Sprintf("\n\nHost %s\n\tHostName %s\n\tPort %s\n\tUser %s", host, hostName, port, user)
-}
-
-// extraction of username and hostname and port
-// user@10.0.0.1 -p 22 -> 10.0.0.1, user, 22
-func extractParams(sshLogin string) (string, string, string) {
-	port := "22"
-	userAndHost := "none"
-	user := "none"
-	host := "none"
-	if strings.Contains(sshLogin, "-p") {
-		hostAndPort := strings.Split(sshLogin, "-p")
-		userAndHost = strings.TrimSpace(hostAndPort[0])
-		port = strings.TrimSpace(hostAndPort[1])
-	} else {
-		userAndHost = sshLogin
-	}
-
-	if strings.Contains(userAndHost, "@") {
-		userAndHostName := strings.Split(userAndHost, "@")
-		user = strings.TrimSpace(userAndHostName[0])
-		host = strings.TrimSpace(userAndHostName[1])
-	}
-
-	return host, user, port
-
+	cmd.Execute()
 }
