@@ -66,9 +66,9 @@ func TestExtractConfigPairs(t *testing.T) {
 
 func TestParser(t *testing.T) {
 	file, _ := os.ReadFile("testdata/config")
-	parsedConfigs := Parse(file)
+	parsedConfigs := Parse(string(file))
 
-	var expectedParsedConfigs map[string]Config
+	expectedParsedConfigs := make(map[string]Config)
 	expectedParsedConfigs["hello"] = Config{
 		HostName: "10.0.0.1",
 		Port:     "22",
