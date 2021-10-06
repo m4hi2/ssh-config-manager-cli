@@ -82,7 +82,7 @@ func TestParser(t *testing.T) {
 		IdFile:   "nil",
 	}
 
-	if reflect.DeepEqual(parsedConfigs, expectedParsedConfigs) {
+	if !reflect.DeepEqual(parsedConfigs, expectedParsedConfigs) {
 		t.Fatalf("Configs are not equal. \n ParsedConfig is: %v \n and ExpectedParsedConfigs is: %v", parsedConfigs, expectedParsedConfigs)
 	}
 }
