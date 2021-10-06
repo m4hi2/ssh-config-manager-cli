@@ -70,16 +70,16 @@ func TestParser(t *testing.T) {
 
 	expectedParsedConfigs := make(map[string]Config)
 	expectedParsedConfigs["hello"] = Config{
+		Host:     "hello",
 		HostName: "10.0.0.1",
 		Port:     "22",
 		User:     "user",
-		IdFile:   "nil",
 	}
 	expectedParsedConfigs["hello2"] = Config{
+		Host:     "hello2",
 		HostName: "10.0.0.11",
 		Port:     "22",
 		User:     "user1",
-		IdFile:   "nil",
 	}
 
 	if !reflect.DeepEqual(parsedConfigs, expectedParsedConfigs) {
