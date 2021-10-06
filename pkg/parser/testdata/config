@@ -7,13 +7,3 @@ Host hello2
 	HostName 10.0.0.11
 	Port 22
 	User user1
-
-Host hello3
-	HostName 10.0.0.12
-	Port 22
-	User user2
-
-Host hello4
-	HostName 10.0.0.13
-	Port 22
-	User user3

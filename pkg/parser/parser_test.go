@@ -3,6 +3,7 @@ package parser
 import (
 	"bufio"
 	"os"
+	"reflect"
 	"testing"
 )
 
@@ -60,5 +61,28 @@ func TestExtractConfigPairs(t *testing.T) {
 	config = extractConfigPairs(string(value))
 	if config != userConfig {
 		t.Fatal("user Config Cannot be read")
+	}
+}
+
+func TestParser(t *testing.T) {
+	file, _ := os.ReadFile("testdata/config")
+	parsedConfigs := Parse(file)
+
+	var expectedParsedConfigs map[string]Config
+	expectedParsedConfigs["hello"] = Config{
+		HostName: "10.0.0.1",
+		Port:     "22",
+		User:     "user",
+		IdFile:   "nil",
+	}
+	expectedParsedConfigs["hello2"] = Config{
+		HostName: "10.0.0.11",
+		Port:     "22",
+		User:     "user1",
+		IdFile:   "nil",
+	}
+
+	if reflect.DeepEqual(parsedConfigs, expectedParsedConfigs) {
+		t.Fatalf("Configs are not equal. \n ParsedConfig is: %v \n and ExpectedParsedConfigs is: %v", parsedConfigs, expectedParsedConfigs)
 	}
 }
