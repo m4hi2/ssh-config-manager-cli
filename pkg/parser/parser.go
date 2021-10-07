@@ -54,20 +54,17 @@ func Parse(fileContent string) parsedConfigMap {
 			line = strings.TrimSpace(line)
 			configPair := extractConfigPairs(line)
 
-			if configPair.FieldName == "Host" {
+			switch configPair.FieldName {
+			case "Host":
 				currentHost = configPair.Value
 				parsedConfigs[currentHost] = &Config{
 					Host: currentHost,
 				}
-			}
-			// TODO: write in if-else structure.
-			if configPair.FieldName == "HostName" {
+			case "HostName":
 				parsedConfigs[currentHost].HostName = configPair.Value
-			}
-			if configPair.FieldName == "Port" {
+			case "Port":
 				parsedConfigs[currentHost].Port = configPair.Value
-			}
-			if configPair.FieldName == "User" {
+			case "User":
 				parsedConfigs[currentHost].User = configPair.Value
 			}
 		}
