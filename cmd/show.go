@@ -33,8 +33,9 @@ var showCmd = &cobra.Command{
 		filepath := os.Getenv("HOME") + "/.ssh/config"
 		fileContent, err := os.ReadFile(filepath)
 		if err != nil {
-			fmt.Printf("ssh config file not found at: %s", filepath)
+			fmt.Printf("ssh config file not found at: %s\n", filepath)
 			fmt.Println(err)
+			os.Exit(1)
 		}
 		fmt.Println(string(fileContent))
 
