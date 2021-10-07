@@ -68,14 +68,14 @@ func TestParser(t *testing.T) {
 	file, _ := os.ReadFile("testdata/config")
 	parsedConfigs := Parse(string(file))
 
-	expectedParsedConfigs := make(map[string]Config)
-	expectedParsedConfigs["hello"] = Config{
+	expectedParsedConfigs := make(parsedConfigMap)
+	expectedParsedConfigs["hello"] = &Config{
 		Host:     "hello",
 		HostName: "10.0.0.1",
 		Port:     "22",
 		User:     "user",
 	}
-	expectedParsedConfigs["hello2"] = Config{
+	expectedParsedConfigs["hello2"] = &Config{
 		Host:     "hello2",
 		HostName: "10.0.0.11",
 		Port:     "22",
