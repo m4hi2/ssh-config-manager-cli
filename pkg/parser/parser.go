@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"log"
 	"strings"
 )
 
@@ -74,10 +73,4 @@ func Parse(fileContent string) parsedConfigMap {
 		}
 	}
 	return parsedConfigs
-}
-
-func rangePrinter(thingToPrint []string) {
-	for i, s := range thingToPrint {
-		log.Println(i, s)
-	}
 }
