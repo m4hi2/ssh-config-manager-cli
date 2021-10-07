@@ -34,10 +34,7 @@ func Parse(fileContent string) parsedConfigMap {
 	parsedConfigs := make(parsedConfigMap)
 	configs := strings.Split(fileContent, "Host ")
 	var configSlices []string
-	for i, s := range configs {
-		if i == 0 {
-			continue
-		}
+	for _, s := range configs[1:] {
 		temp := "Host " + s
 		configSlices = append(configSlices, temp)
 
