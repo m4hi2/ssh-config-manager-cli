@@ -18,6 +18,8 @@ type configPair struct {
 	Value     string
 }
 
+type parsedConfigMap map[string]*Config
+
 func extractConfigPairs(line string) configPair {
 	configLine := strings.Split(line, " ")
 	fieldName := strings.TrimSpace(configLine[0])
@@ -29,8 +31,8 @@ func extractConfigPairs(line string) configPair {
 	return config
 }
 
-func Parse(fileContent string) map[string]Config {
-	parsedConfigs := make(map[string]Config)
+func Parse(fileContent string) parsedConfigMap {
+	parsedConfigs := make(parsedConfigMap)
 	configs := strings.Split(fileContent, "Host ")
 	var configSlices []string
 	for i, s := range configs {
