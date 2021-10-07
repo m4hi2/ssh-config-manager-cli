@@ -47,7 +47,7 @@ func Parse(fileContent string) parsedConfigMap {
 	for _, s := range configSlices {
 		s = strings.TrimSpace(s)
 		configLines := strings.Split(s, "\n")
-		currentHost := "nil"
+		currentHost := ""
 		for _, line := range configLines {
 			if line == " " {
 				continue
