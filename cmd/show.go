@@ -34,7 +34,11 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		filepath := os.Getenv("HOME") + "/.ssh/config"
-		fileContent, _ := os.ReadFile(filepath)
+		fileContent, err := os.ReadFile(filepath)
+		if err != nil {
+			fmt.Printf("ssh config file not found at: %s", filepath)
+			fmt.Println(err)
+		}
 		fmt.Println(string(fileContent))
 
 	},
