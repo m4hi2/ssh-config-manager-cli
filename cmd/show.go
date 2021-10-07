@@ -25,13 +25,10 @@ import (
 // showCmd represents the show command
 var showCmd = &cobra.Command{
 	Use:   "show",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "shows the current ssh config file of the user",
+	Long: `shows the current ssh config file of the user
+	this currently assumes the file is in $HOME/.ssh/config`,
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		filepath := os.Getenv("HOME") + "/.ssh/config"
 		fileContent, err := os.ReadFile(filepath)
