@@ -64,25 +64,26 @@ func TestExtractConfigPairs(t *testing.T) {
 	}
 }
 
-func TestParser(t *testing.T) {
-	file, _ := os.ReadFile("testdata/config")
-	parsedConfigs := Parse(string(file))
-
-	expectedParsedConfigs := make(parsedConfigMap)
-	expectedParsedConfigs["hello"] = &Config{
+var sampleParsedConfigs = parsedConfigMap{
+	"hello": &Config{
 		Host:     "hello",
 		HostName: "10.0.0.1",
 		Port:     "22",
 		User:     "user",
-	}
-	expectedParsedConfigs["hello2"] = &Config{
+	},
+	"hello2": &Config{
 		Host:     "hello2",
 		HostName: "10.0.0.11",
 		Port:     "22",
 		User:     "user1",
-	}
+	},
+}
 
-	if !reflect.DeepEqual(parsedConfigs, expectedParsedConfigs) {
-		t.Fatalf("Configs are not equal. \n ParsedConfig is: %v \n and ExpectedParsedConfigs is: %v", parsedConfigs, expectedParsedConfigs)
+func TestParser(t *testing.T) {
+	file, _ := os.ReadFile("testdata/config")
+	parsedConfigs := Parse(string(file))
+
+	if !reflect.DeepEqual(parsedConfigs, sampleParsedConfigs) {
+		t.Fatalf("Configs are not equal. \n ParsedConfig is: %v \n and ExpectedParsedConfigs is: %v", parsedConfigs, sampleParsedConfigs)
 	}
 }
