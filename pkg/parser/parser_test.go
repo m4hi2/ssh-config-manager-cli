@@ -89,11 +89,11 @@ func TestParser(t *testing.T) {
 }
 
 func TestComposer(t *testing.T) {
-	configFile, _ := os.ReadFile("testdata/config")
-	configFileString := string(configFile)
+	sampleConfigFile, _ := os.ReadFile("testdata/config")
+	sampleConfigFileString := string(sampleConfigFile)
 	composedConfig := Compose(sampleParsedConfigs)
 
-	if configFileString != composedConfig {
-		t.Fatalf("Composed Config is not up to the mark \n Composed Config \n %s", composedConfig)
+	if sampleConfigFileString != composedConfig {
+		t.Fatalf("Composed Config is not up to the mark \nComposed Config: \n%s\n vs Sample Config: \n%s", composedConfig, sampleConfigFile)
 	}
 }
