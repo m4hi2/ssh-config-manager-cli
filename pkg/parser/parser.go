@@ -9,7 +9,7 @@ type Config struct {
 	HostName string
 	User     string
 	Port     string
-	IdFile   string
+	// IdFile   string
 }
 
 type configPair struct {
