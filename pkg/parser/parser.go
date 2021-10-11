@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -67,4 +68,12 @@ func Parse(fileContent string) parsedConfigMap {
 		}
 	}
 	return parsedConfigs
+}
+
+func Compose(parsedConfigs parsedConfigMap) (sshConfig string) {
+	for _, v := range parsedConfigs {
+		sshConfig = sshConfig + fmt.Sprintf("Host %s\n\tHostName %s\n\tPort %s\n\tUser %s\n\n", v.Host, v.HostName, v.Port, v.User)
+	}
+	sshConfig = strings.TrimSpace(sshConfig)
+	return
 }
