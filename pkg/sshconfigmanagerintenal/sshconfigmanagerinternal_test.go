@@ -16,5 +16,6 @@ func TestFileBackUp(t *testing.T) {
 	if string(file) != string(backedUpFile) {
 		t.Fatalf("Original file and backup file are not same")
 	}
+	os.Remove("testdata/config.bak")
 
 }
