@@ -36,17 +36,18 @@ func TestLowLevelAdd(t *testing.T) {
 	fileAdded, _ := os.ReadFile("testdata/config")
 
 	if string(fileAdded) != string(fileSample) {
-		// clean up
-		backUpFile, _ := os.ReadFile("testdata/config.bak")
-		os.WriteFile("testdata/config", []byte(backUpFile), 0644)
-		os.Remove("testdata/config.bak")
+		addCleanUp("testdata/config")
 		log.Fatalln("Config file not created properly.")
 
 	}
 
-	// clean up
-	backUpFile, _ := os.ReadFile("testdata/config.bak")
-	os.WriteFile("testdata/config", []byte(backUpFile), 0644)
-	os.Remove("testdata/config.bak")
+	addCleanUp("testdata/config")
+}
+
+func addCleanUp(filePath string) {
+	bakFilePath := filePath + ".bak"
+	backUpFile, _ := os.ReadFile(bakFilePath)
+	os.WriteFile(filePath, []byte(backUpFile), 0644)
+	os.Remove(bakFilePath)
 
 }
