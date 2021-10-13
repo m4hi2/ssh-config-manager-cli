@@ -18,7 +18,7 @@ type configPair struct {
 	Value     string
 }
 
-type parsedConfigMap map[string]*Config
+type ParsedConfigMap map[string]*Config
 
 func extractConfigPairs(line string) configPair {
 	configLine := strings.Split(line, " ")
@@ -31,8 +31,8 @@ func extractConfigPairs(line string) configPair {
 	return config
 }
 
-func Parse(fileContent string) parsedConfigMap {
-	parsedConfigs := make(parsedConfigMap)
+func Parse(fileContent string) ParsedConfigMap {
+	parsedConfigs := make(ParsedConfigMap)
 	configs := strings.Split(fileContent, "Host ")
 	var configSlices []string
 	for _, s := range configs[1:] {
@@ -70,7 +70,7 @@ func Parse(fileContent string) parsedConfigMap {
 	return parsedConfigs
 }
 
-func Compose(parsedConfigs parsedConfigMap) (sshConfig string) {
+func Compose(parsedConfigs ParsedConfigMap) (sshConfig string) {
 	for _, v := range parsedConfigs {
 		sshConfig = sshConfig + fmt.Sprintf("Host %s\n\tHostName %s\n\tPort %s\n\tUser %s\n\n", v.Host, v.HostName, v.Port, v.User)
 	}
