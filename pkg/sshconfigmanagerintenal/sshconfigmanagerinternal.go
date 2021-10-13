@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/m4hi2/ssh-config-manager-cli/pkg/parser"
 )
 
 func backUpFile(filePath string) {
@@ -14,4 +16,14 @@ func backUpFile(filePath string) {
 
 	backUp, _ := os.Create(fmt.Sprintf("%s.bak", filePath))
 	backUp.Write(originalFile)
+}
+
+func add(config parser.Config, filePath string) {
+	backUpFile(filePath)
+	fileContent, _ := os.ReadFile(filePath)
+	parsedConfig := parser.Parse(string(fileContent))
+	parsedConfig[config.Host] = &config
+	newComposedConfig := parser.Compose(parsedConfig)
+	os.WriteFile(filePath, []byte(newComposedConfig), 0644)
+
 }
