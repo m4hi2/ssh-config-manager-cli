@@ -1,7 +1,17 @@
 package sshconfigmanagerintenal
 
-import "github.com/m4hi2/ssh-config-manager-cli/pkg/parser"
+import (
+	"fmt"
+	"log"
+	"os"
+)
 
-func add(config parser.Config, filename string) {
+func backUpFile(filePath string) {
+	originalFile, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatalf("Can not find ssh config file\n Error: %s", err)
+	}
 
+	backUp, _ := os.Create(fmt.Sprintf("%s.bak", filePath))
+	backUp.Write(originalFile)
 }

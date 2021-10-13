@@ -1,0 +1,9 @@
+Host hello
+	HostName 10.0.0.1
+	Port 22
+	User user
+
+Host hello2
+	HostName 10.0.0.11
+	Port 22
+	User user1
