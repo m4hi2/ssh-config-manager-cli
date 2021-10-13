@@ -64,7 +64,7 @@ func TestExtractConfigPairs(t *testing.T) {
 	}
 }
 
-var sampleParsedConfigs = parsedConfigMap{
+var sampleParsedConfigs = ParsedConfigMap{
 	"hello": &Config{
 		Host:     "hello",
 		HostName: "10.0.0.1",
