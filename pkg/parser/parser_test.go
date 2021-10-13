@@ -87,3 +87,13 @@ func TestParser(t *testing.T) {
 		t.Fatalf("Configs are not equal. \n ParsedConfig is: %v \n and ExpectedParsedConfigs is: %v", parsedConfigs, sampleParsedConfigs)
 	}
 }
+
+func TestComposer(t *testing.T) {
+	sampleConfigFile, _ := os.ReadFile("testdata/config")
+	sampleConfigFileString := string(sampleConfigFile)
+	composedConfig := Compose(sampleParsedConfigs)
+
+	if sampleConfigFileString != composedConfig {
+		t.Fatalf("Composed Config is not up to the mark \nComposed Config: \n%s\n vs Sample Config: \n%s", composedConfig, sampleConfigFile)
+	}
+}
