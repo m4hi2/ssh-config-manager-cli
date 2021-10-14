@@ -106,7 +106,5 @@ func promptGetInput(pc promptContent) string {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Input: %s\n", result)
-
 	return result
 }
