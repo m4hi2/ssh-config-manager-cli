@@ -21,6 +21,7 @@ import (
 	"os"
 
 	"github.com/m4hi2/ssh-config-manager-cli/pkg/parser"
+	"github.com/m4hi2/ssh-config-manager-cli/pkg/sshconfigmanagerintenal"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 )
@@ -71,7 +72,7 @@ func addWithPrompt() {
 		User:     user,
 	}
 
-	fmt.Println(newConfig)
+	sshconfigmanagerintenal.Add(newConfig, "config")
 }
 
 type promptContent struct {
