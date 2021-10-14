@@ -34,3 +34,8 @@ var promptCmd = &cobra.Command{
 func init() {
 	addCmd.AddCommand(promptCmd)
 }
+
+type promptContent struct {
+	errorMsg string
+	label    string
+}
