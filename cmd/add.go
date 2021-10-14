@@ -16,8 +16,6 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -26,9 +24,6 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new host to the ssh config file",
 	Long:  `Adds a new host to the ssh config file`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
-	},
 }
 
 func init() {
