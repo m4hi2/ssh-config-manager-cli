@@ -30,7 +30,7 @@ func TestLowLevelAdd(t *testing.T) {
 		Port:     "22",
 		User:     "m4hi2",
 	}
-	add(sampleConfig, "testdata/config")
+	Add(sampleConfig, "testdata/config")
 
 	fileSample, _ := os.ReadFile("testdata/config_add_sample")
 	fileAdded, _ := os.ReadFile("testdata/config")

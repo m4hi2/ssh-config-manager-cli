@@ -18,7 +18,7 @@ func backUpFile(filePath string) {
 	backUp.Write(originalFile)
 }
 
-func add(config parser.Config, filePath string) {
+func Add(config parser.Config, filePath string) {
 	backUpFile(filePath)
 	fileContent, _ := os.ReadFile(filePath)
 	parsedConfig := parser.Parse(string(fileContent))
