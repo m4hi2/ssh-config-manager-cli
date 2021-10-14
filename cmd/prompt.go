@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/m4hi2/ssh-config-manager-cli/pkg/parser"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 )
@@ -30,12 +31,47 @@ var promptCmd = &cobra.Command{
 	Short: "Provides a prompt to the user for adding host config interactively",
 	Long:  `Provides a prompt to the user for adding host config interactively`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("prompt called")
+		addWithPrompt()
 	},
 }
 
 func init() {
 	addCmd.AddCommand(promptCmd)
+}
+
+func addWithPrompt() {
+	hostPrompt := promptContent{
+		errorMsg: "Enter a friendly host name",
+		label:    "Host (Enter a name that you can remember for this server):",
+	}
+	host := promptGetInput(hostPrompt)
+
+	hostNamePrompt := promptContent{
+		errorMsg: "Enter the server address",
+		label:    "HostName (Enter either the IP or the domain of the server):",
+	}
+	hostName := promptGetInput(hostNamePrompt)
+
+	portPrompt := promptContent{
+		errorMsg: "Enter the ssh port nubmer of the server",
+		label:    "Port (Enter the ssh port. If not sure, enter 22):",
+	}
+	port := promptGetInput(portPrompt)
+
+	userPrompt := promptContent{
+		errorMsg: "Enter the login user name",
+		label:    "User (Enter the username to be logged in as):",
+	}
+	user := promptGetInput(userPrompt)
+
+	newConfig := parser.Config{
+		Host:     host,
+		HostName: hostName,
+		Port:     port,
+		User:     user,
+	}
+
+	fmt.Println(newConfig)
 }
 
 type promptContent struct {
