@@ -12,6 +12,7 @@ func backUpFile(filePath string) {
 	originalFile, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Printf("Can not find ssh config file\n Error: %s", err)
+		log.Printf("Creating empty file as backup file...")
 	}
 
 	backUp, _ := os.Create(fmt.Sprintf("%s.bak", filePath))
