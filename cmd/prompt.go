@@ -71,8 +71,9 @@ func addWithPrompt() {
 		Port:     port,
 		User:     user,
 	}
-
-	sshconfigmanagerintenal.Add(newConfig, "config")
+	homeDir, _ := os.UserHomeDir()
+	sshConfigFilePath := fmt.Sprintf("%s/.ssh/config", homeDir)
+	sshconfigmanagerintenal.Add(newConfig, sshConfigFilePath)
 }
 
 type promptContent struct {
