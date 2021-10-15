@@ -16,13 +16,11 @@ limitations under the License.
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"os"
 
 	"github.com/m4hi2/ssh-config-manager-cli/pkg/parser"
 	"github.com/m4hi2/ssh-config-manager-cli/pkg/sshconfigmanagerintenal"
-	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 )
 
@@ -41,29 +39,29 @@ func init() {
 }
 
 func addWithPrompt() {
-	hostPrompt := promptContent{
-		errorMsg: "Enter a friendly host name",
-		label:    "Host (Enter a name that you can remember for this server):",
+	hostPrompt := sshconfigmanagerintenal.PromptContent{
+		ErrorMsg: "Enter a friendly host name",
+		Label:    "Host (Enter a name that you can remember for this server):",
 	}
-	host := promptGetInput(hostPrompt)
+	host := sshconfigmanagerintenal.PromptGetInput(hostPrompt)
 
-	hostNamePrompt := promptContent{
-		errorMsg: "Enter the server address",
-		label:    "HostName (Enter either the IP or the domain of the server):",
+	hostNamePrompt := sshconfigmanagerintenal.PromptContent{
+		ErrorMsg: "Enter the server address",
+		Label:    "HostName (Enter either the IP or the domain of the server):",
 	}
-	hostName := promptGetInput(hostNamePrompt)
+	hostName := sshconfigmanagerintenal.PromptGetInput(hostNamePrompt)
 
-	portPrompt := promptContent{
-		errorMsg: "Enter the ssh port nubmer of the server",
-		label:    "Port (Enter the ssh port. If not sure, enter 22):",
+	portPrompt := sshconfigmanagerintenal.PromptContent{
+		ErrorMsg: "Enter the ssh port nubmer of the server",
+		Label:    "Port (Enter the ssh port. If not sure, enter 22):",
 	}
-	port := promptGetInput(portPrompt)
+	port := sshconfigmanagerintenal.PromptGetInput(portPrompt)
 
-	userPrompt := promptContent{
-		errorMsg: "Enter the login user name",
-		label:    "User (Enter the username to be logged in as):",
+	userPrompt := sshconfigmanagerintenal.PromptContent{
+		ErrorMsg: "Enter the login user name",
+		Label:    "User (Enter the username to be logged in as):",
 	}
-	user := promptGetInput(userPrompt)
+	user := sshconfigmanagerintenal.PromptGetInput(userPrompt)
 
 	newConfig := parser.Config{
 		Host:     host,
@@ -74,39 +72,4 @@ func addWithPrompt() {
 	homeDir, _ := os.UserHomeDir()
 	sshConfigFilePath := fmt.Sprintf("%s/.ssh/config", homeDir)
 	sshconfigmanagerintenal.Add(newConfig, sshConfigFilePath)
-}
-
-type promptContent struct {
-	errorMsg string
-	label    string
-}
-
-func promptGetInput(pc promptContent) string {
-	validate := func(input string) error {
-		if len(input) <= 0 {
-			return errors.New(pc.errorMsg)
-		}
-		return nil
-	}
-
-	templates := &promptui.PromptTemplates{
-		Prompt:  "{{ . }} ",
-		Valid:   "{{ . | green }} ",
-		Invalid: "{{ . | red }} ",
-		Success: "{{ . | bold }} ",
-	}
-
-	prompt := promptui.Prompt{
-		Label:     pc.label,
-		Templates: templates,
-		Validate:  validate,
-	}
-
-	result, err := prompt.Run()
-	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
-		os.Exit(1)
-	}
-
-	return result
 }
